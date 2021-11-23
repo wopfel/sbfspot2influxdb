@@ -1,0 +1,124 @@
+#!/bin/perl
+
+
+###################################################################
+#
+#   sbfspot2influxdb (sbfspot to influxdb)
+#
+###################################################################
+#
+#   A program which stores data into an influxdb
+#
+#   https://github.com/wopfel/sbfspot2influxdb
+#
+#   Copyright (c) 2021 Bernd Arnold
+#   See LICENSE file for details
+#
+###################################################################
+
+
+use strict;
+use warnings;
+
+my @output = `sqlite3 smadata/SBFspot.db 'select * from SpotData order by timestamp desc'`; # limit 1'`;
+
+foreach my $line ( @output ) {
+
+    chomp $line;
+
+    #print $line;
+    my @fields = split /\|/, $line;
+
+
+    my $timestamp = $fields[0] . "000000000";
+    my $serial = $fields[1];
+    #
+    my $pdc1 = $fields[2];
+    my $pdc2 = $fields[3];
+    my $idc1 = $fields[4];
+    my $idc2 = $fields[5];
+    my $udc1 = $fields[6];
+    my $udc2 = $fields[7];
+    #	Pac1 int, Pac2 int, Pac3 int,
+    #	Iac1 float, Iac2 float, Iac3 float,
+    #	Uac1 float, Uac2 float, Uac3 float,
+    my $pac1 = $fields[8];
+    my $pac2 = $fields[9];
+    my $pac3 = $fields[10];
+    my $iac1 = $fields[11];
+    my $iac2 = $fields[12];
+    my $iac3 = $fields[13];
+    my $uac1 = $fields[14];
+    my $uac2 = $fields[15];
+    my $uac3 = $fields[16];
+    #	EToday int(8), ETotal int(8),
+    my $etoday = $fields[17];
+    my $etotal = $fields[18];
+    #	Frequency float,
+    my $freq = $fields[19];
+    #	OperatingTime double,
+    #	FeedInTime double,
+    #	BT_Signal float,
+    my $btsignal = $fields[22];
+    #	Status varchar(10),
+    #	GridRelay varchar(10),
+    #	Temperature float,
+    my $temperature = $fields[25];
+#print @fields;
+
+    my $curloutput;
+    my $data;
+
+    $data = "power,current=dc,line=1,serial=$serial value=$pdc1 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+    $data = "power,current=dc,line=2,serial=$serial value=$pdc2 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+
+    $data = "current,current=dc,line=1,serial=$serial value=$idc1 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+    $data = "current,current=dc,line=2,serial=$serial value=$idc2 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+
+    $data = "voltage,current=dc,line=1,serial=$serial value=$udc1 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+    $data = "voltage,current=dc,line=2,serial=$serial value=$udc2 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+
+    $data = "power,current=ac,line=1,serial=$serial value=$pac1 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+    $data = "power,current=ac,line=2,serial=$serial value=$pac2 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+    $data = "power,current=ac,line=3,serial=$serial value=$pac3 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+
+    $data = "current,current=ac,line=1,serial=$serial value=$iac1 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+    $data = "current,current=ac,line=2,serial=$serial value=$iac2 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+    $data = "current,current=ac,line=3,serial=$serial value=$iac3 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+
+    $data = "voltage,current=ac,line=1,serial=$serial value=$uac1 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+    $data = "voltage,current=ac,line=2,serial=$serial value=$uac2 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+    $data = "voltage,current=ac,line=3,serial=$serial value=$uac3 $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+
+    $data = "ingest_today,serial=$serial value=$etoday $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+    $data = "ingest_total,serial=$serial value=$etotal $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+
+    $data = "frequency,serial=$serial value=$freq $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+
+    $data = "btsignal,serial=$serial value=$btsignal $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+
+    $data = "temperature,serial=$serial value=$temperature $timestamp";
+    $curloutput = `curl -i -XPOST 'http://influx2.lan:8086/write?db=pvinverter' --data-binary '$data'`;
+
+    print $curloutput;
+
+}
