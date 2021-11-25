@@ -29,3 +29,5 @@ Using cron, the sbfspot2influxdb script can be run by cron (`crontab -e` for use
 Using that snippet, the script is called every 5 minutes, reading the latest 10 entries from the sqlite database, writing entries to InfluxDB. So you won't miss any data if the script wasn't called for some time.
 
 The script runs from 6 am to 11 pm, same as sbfspot's daydata script.
+
+(If you want to transfer all entries from the database to InfluxDB, please have a look at commit d2689d264458b257532c2da451dca27bf9aa034e - you have to remove the `limit 10` part)
