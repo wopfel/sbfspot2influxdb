@@ -20,7 +20,8 @@
 use strict;
 use warnings;
 
-my @output = `sqlite3 smadata/SBFspot.db 'select * from SpotData order by timestamp desc'`; # limit 1'`;
+my @output = `sqlite3 smadata/SBFspot.db 'select * from SpotData order by timestamp desc limit 10'`;
+#my @output = `sqlite3 smadata/SBFspot.db 'select * from SpotData order by timestamp desc'`; # limit 1'`;
 
 foreach my $line ( @output ) {
 
