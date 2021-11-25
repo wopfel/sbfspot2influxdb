@@ -25,3 +25,7 @@ You have to create an InfluxDB database first.
 Using cron, the sbfspot2influxdb script can be run by cron (`crontab -e` for user pi):
 
 `*/5 6-22 * * * /home/pi/sqlite2influx 1> /home/pi/sqlite2influx.log 2>&1`
+
+Using that snippet, the script is called every 5 minutes, reading the latest 10 entries from the sqlite database, writing entries to InfluxDB. So you won't miss any data if the script wasn't called for some time.
+
+The script runs from 6 am to 11 pm, same as sbfspot's daydata script.
