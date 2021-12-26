@@ -36,3 +36,11 @@ The script runs from 6 am to 11 pm, same as sbfspot's daydata script.
 Most fields from table SpotData are transferred to InfluxDB. See [table definition](https://github.com/rg-engineering/SBFspot/blob/3ddcd442558d8896220afcef97e0ef8b6a74e241/SBFspot/CreateSQLiteDB.sql#L39).
 
 Beginning 2021-12-26, I'm using InfluxDB v2.
+
+
+How does it look like?
+----------------------
+
+Choosing ingest_today, it may look like this, showing an ingest (etoday) of 23 kWh for Dec 20th:
+
+![Sample InfluxDBv2](sample-view-influxdbv2.png)
