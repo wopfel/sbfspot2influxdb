@@ -21,7 +21,6 @@ use strict;
 use warnings;
 
 my @output = `sqlite3 smadata/SBFspot.db 'select * from SpotData order by timestamp desc limit 10'`;
-#my @output = `sqlite3 smadata/SBFspot.db 'select * from SpotData order by timestamp desc'`; # limit 1'`;
 
 foreach my $line ( @output ) {
 
@@ -69,7 +68,6 @@ foreach my $line ( @output ) {
     # GridRelay varchar(10),
     # Temperature float,
     my $temperature = $fields[25];
-#print @fields;
 
     my $curloutput;
     my $data;
