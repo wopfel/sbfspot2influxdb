@@ -33,7 +33,7 @@ The script runs from 6 am to 11 pm, same as sbfspot's daydata script.
 
 (If you want to transfer all entries from the database to InfluxDB, please have a look at commit d2689d264458b257532c2da451dca27bf9aa034e - you have to remove the `limit 10` part)
 
-Most fields from table SpotData are transferred to InfluxDB. See [table definition](https://github.com/rg-engineering/SBFspot/blob/3ddcd442558d8896220afcef97e0ef8b6a74e241/SBFspot/CreateSQLiteDB.sql#L39).
+Most fields from table SpotData are transferred to InfluxDB. See [table definition](https://github.com/rg-engineering/SBFspot/blob/2287f3a83c7b42b13c72be5ef59f6821a37dcfe0/SBFspot/CreateSQLiteDB.sql#L39).
 
 Beginning 2021-12-26, I'm using InfluxDB v2.
 
