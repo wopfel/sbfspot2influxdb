@@ -36,7 +36,7 @@ foreach my $line ( @output ) {
     # Field values taken from CREATE Table SpotData:
     # https://github.com/rg-engineering/SBFspot/blob/3ddcd442558d8896220afcef97e0ef8b6a74e241/SBFspot/CreateSQLiteDB.sql#L39
     # Pdc1 int, Pdc2 int,
-    #	Idc1 float, Idc2 float,
+    # Idc1 float, Idc2 float,
     # Udc1 float, Udc2 float,
     my $pdc1 = $fields[2];
     my $pdc2 = $fields[3];
@@ -44,9 +44,9 @@ foreach my $line ( @output ) {
     my $idc2 = $fields[5];
     my $udc1 = $fields[6];
     my $udc2 = $fields[7];
-    #	Pac1 int, Pac2 int, Pac3 int,
-    #	Iac1 float, Iac2 float, Iac3 float,
-    #	Uac1 float, Uac2 float, Uac3 float,
+    # Pac1 int, Pac2 int, Pac3 int,
+    # Iac1 float, Iac2 float, Iac3 float,
+    # Uac1 float, Uac2 float, Uac3 float,
     my $pac1 = $fields[8];
     my $pac2 = $fields[9];
     my $pac3 = $fields[10];
@@ -56,18 +56,18 @@ foreach my $line ( @output ) {
     my $uac1 = $fields[14];
     my $uac2 = $fields[15];
     my $uac3 = $fields[16];
-    #	EToday int(8), ETotal int(8),
+    # EToday int(8), ETotal int(8),
     my $etoday = $fields[17];
     my $etotal = $fields[18];
-    #	Frequency float,
+    # Frequency float,
     my $freq = $fields[19];
-    #	OperatingTime double,
-    #	FeedInTime double,
-    #	BT_Signal float,
+    # OperatingTime double,
+    # FeedInTime double,
+    # BT_Signal float,
     my $btsignal = $fields[22];
-    #	Status varchar(10),
-    #	GridRelay varchar(10),
-    #	Temperature float,
+    # Status varchar(10),
+    # GridRelay varchar(10),
+    # Temperature float,
     my $temperature = $fields[25];
 #print @fields;
 
