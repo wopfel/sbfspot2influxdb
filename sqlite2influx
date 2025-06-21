@@ -34,7 +34,7 @@ foreach my $line ( @output ) {
     my $timestamp = $fields[0] . "000000000";
     my $serial = $fields[1];
     # Field values taken from CREATE Table SpotData:
-    # https://github.com/rg-engineering/SBFspot/blob/3ddcd442558d8896220afcef97e0ef8b6a74e241/SBFspot/CreateSQLiteDB.sql#L39
+    # https://github.com/rg-engineering/SBFspot/blob/2287f3a83c7b42b13c72be5ef59f6821a37dcfe0/SBFspot/CreateSQLiteDB.sql#L39
     # Pdc1 int, Pdc2 int,
     # Idc1 float, Idc2 float,
     # Udc1 float, Udc2 float,
