@@ -110,6 +110,6 @@ foreach my $line ( @output ) {
     $data .= "\ntemperature,serial=$serial value=$temperature $timestamp";
 
     $curloutput = `$curlcall '$data'`;
-    print $curloutput;
+    print $curloutput;  # output should contain 'HTTP/1.1 204 No Content'
 
 }
